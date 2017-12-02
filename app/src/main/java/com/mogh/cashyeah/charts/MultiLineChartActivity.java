@@ -55,9 +55,6 @@ public class MultiLineChartActivity extends ChartBaseActivity
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth)
         {
-            // arg1 = year
-            // arg2 = month
-            // arg3 = day
             startCalendar.set(Calendar.YEAR, year);
             startCalendar.set(Calendar.MONTH, month);
             startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -70,9 +67,6 @@ public class MultiLineChartActivity extends ChartBaseActivity
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth)
         {
-            // arg1 = year
-            // arg2 = month
-            // arg3 = day
             endCalendar.set(Calendar.YEAR, year);
             endCalendar.set(Calendar.MONTH, month);
             endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -128,47 +122,9 @@ public class MultiLineChartActivity extends ChartBaseActivity
         mChart.setPinchZoom(false);
 
         Legend l = mChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
 
         mChart.animateX(2000);
         mChart.getXAxis().setLabelCount(10);
-
-        final List<String> labels = new ArrayList<>();
-        labels.add("Jan 1");
-        labels.add("Jan 30");
-        labels.add("Feb 15");
-        labels.add("Feb 28");
-        labels.add("Mar 15");
-        labels.add("Mar 30");
-        labels.add("Apr 15");
-        labels.add("Apr 30");
-        labels.add("May 15");
-        labels.add("May 30");
-
-        labels.add("Jun 15");
-        labels.add("Jun 30");
-        labels.add("Jul 15");
-        labels.add("Jul 30");
-        labels.add("Aug 15");
-        labels.add("Aug 30");
-        labels.add("Jan 1");
-        labels.add("Jan 1");
-        labels.add("Jan 1");
-        labels.add("Jan 1");
-
-        labels.add("Jun 15");
-        labels.add("Jun 30");
-        labels.add("Jul 15");
-        labels.add("Jul 30");
-        labels.add("Aug 15");
-        labels.add("Aug 30");
-        labels.add("Jan 1");
-        labels.add("Jan 1");
-        labels.add("Jan 1");
-        labels.add("Jan 1");
 
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -267,8 +223,8 @@ public class MultiLineChartActivity extends ChartBaseActivity
 
     private void displayChart(ArrayList<ILineDataSet> dataSets, List<TransactionHistoryItem> transactionHistoryItemsDeposits, List<TransactionHistoryItem> transactionHistoryItemsWithdrawals)
     {
-        LineDataSet lineDataSetDeposits = setTransactionItems(dataSets, transactionHistoryItemsDeposits, "Deposits", Color.RED);
-        LineDataSet lineDataSetWithdrawals = setTransactionItems(dataSets, transactionHistoryItemsWithdrawals, "Withdrawals", Color.rgb(0, 0, 255));
+        LineDataSet lineDataSetDeposits = setTransactionItems(dataSets, transactionHistoryItemsDeposits, "Deposits", Color.rgb(0, 0, 255));
+        LineDataSet lineDataSetWithdrawals = setTransactionItems(dataSets, transactionHistoryItemsWithdrawals, "Withdrawals", Color.RED);
 
         dataSets.add(lineDataSetDeposits);
         dataSets.add(lineDataSetWithdrawals);

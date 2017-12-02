@@ -1,20 +1,11 @@
 package com.mogh.cashyeah;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,7 +14,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
-import static com.mogh.cashyeah.TransactionJSON.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import static com.mogh.cashyeah.TransactionJSON.AMOUNT;
+import static com.mogh.cashyeah.TransactionJSON.DATE;
+import static com.mogh.cashyeah.TransactionJSON.DESCRIPTION;
 
 public class TransactionHistoryScreen extends AppCompatActivity {
 

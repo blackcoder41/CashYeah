@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -37,20 +36,19 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.mogh.cashyeah.MainActivity;
 import com.mogh.cashyeah.R;
 import com.mogh.cashyeah.TransactionHistoryScreen;
-import com.mogh.cashyeah.TxnHistory;
 import com.mogh.cashyeah.activities.SpeechScreen;
 import com.mogh.cashyeah.charts.models.TransactionHistoryController;
 import com.mogh.cashyeah.charts.models.TransactionHistoryItem;
-//import com.mogh.cashyeah.services.connection.controller.TransactionHistoryController;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+
+//import com.mogh.cashyeah.services.connection.controller.TransactionHistoryController;
 
 /**
  * Created by vergilsantos on 02/12/2017.
@@ -77,7 +75,6 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
             startCalendar.set(Calendar.YEAR, year);
             startCalendar.set(Calendar.MONTH, month);
             startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//            startDateButton.setText(sdf.format(startCalendar.getTime()));
         }
     };
 
@@ -89,7 +86,6 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
             endCalendar.set(Calendar.YEAR, year);
             endCalendar.set(Calendar.MONTH, month);
             endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//            endDateButton.setText(sdf.format(endCalendar.getTime()));
         }
     };
 
@@ -105,12 +101,11 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-
+            public void onClick(View view)
+            {
                 Intent speechIntent = new Intent(getApplicationContext(), SpeechScreen.class);
                 startActivity(speechIntent);
             }
@@ -132,8 +127,6 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
             @Override
             public void onClick(View v)
             {
-                // TODO transition to traditional transaction history
-                //Toast.makeText(getApplicationContext(), "transition to traditional transaction history", Toast.LENGTH_SHORT).show();
                 showTransactionHistory();
             }
         });
@@ -196,10 +189,10 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
         sendNotification("Watch out! Your current balance is running low.");
     }
 
-    private void sendNotification(String messageBody) {
+    private void sendNotification(String messageBody)
+    {
         Intent intent = new Intent(this, MultiLineChartActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.putExtra("AnotherActivity", TrueOrFalse);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
@@ -211,9 +204,7 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-//                .setLargeIcon(largeIcon)/*Notification icon image*/
                 .setSmallIcon(R.mipmap.ic_launcher_round)
-//                .setContentTitle(messageBody)
                 .setStyle(new NotificationCompat.BigPictureStyle()
                         .bigPicture(bigSale))/*Notification with Image*/
                 .setAutoCancel(true)
@@ -280,27 +271,6 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
         List<TransactionHistoryItem> transactionHistoryItems = new TransactionHistoryController().getTransactionHistoryDeposit();
         List<TransactionHistoryItem> transactionHistoryItemsWithdrawals = new TransactionHistoryController().getTransactionHistoryWithdrawal();
         displayChart(dataSets, transactionHistoryItems, transactionHistoryItemsWithdrawals);
-
-//        new TransactionHistoryController().getTransactionHistoryDeposit("", new TransactionHistoryController.GetTransactionHistoryCallback()
-//        {
-//            @Override
-//            public void getTransactionHistorySuccessful(LinkedList<TransactionHistoryItem> transactionHistoryItems)
-//            {
-//        displayChart(dataSets, transactionHistoryItems);
-//            }
-//
-//            @Override
-//            public void getTransactionHistoryFailed()
-//            {
-//
-//            }
-//
-//            @Override
-//            public void tokenSessionInvalid(String message)
-//            {
-//
-//            }
-//        });
     }
 
     private void displayChart(ArrayList<ILineDataSet> dataSets, List<TransactionHistoryItem> transactionHistoryItemsDeposits, List<TransactionHistoryItem> transactionHistoryItemsWithdrawals)
@@ -345,7 +315,8 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
         return false;
     }
 
-    public void showTransactionHistory() {
+    public void showTransactionHistory()
+    {
 
         Intent txtHistory = new Intent(this, TransactionHistoryScreen.class);
         startActivity(txtHistory);

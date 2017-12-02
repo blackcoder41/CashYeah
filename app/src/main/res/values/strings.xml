@@ -2,7 +2,12 @@
     <string name="app_name">Cash Yeah!</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
+
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="unionbank_login_uri">https://api-uat.unionbankph.com/partners/sb/convergent/v1/oauth2/authorize?client_id=1ee8131e-b52b-4e54-bbc3-bb59ae8f5cb5&amp;response_type=token&amp;scope=payments&amp;redirect_uri=http%3A%2F%2F127.0.0.1%2Fbank_api%2F&amp;state=cash_yeah_login</string>
+
+    <string name="script_credentials_pmelemos">javascript:setTimeout(function(){document.getElementById(\"username\").value=\"pmelemos\";document.getElementById(\"password\").value=\"password\";},500);</string>
 </resources>

@@ -7,7 +7,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="unionbank_login_uri">https://developer.unionbankph.com/redirect/?original-url=https%3A%2F%2Fapi-uat.unionbankph.com%2Fpartners%2Fsb%2Fconvergent%2Fv1%2Foauth2%2Fauthorize%3Fclient_id%3D1ee8131e-b52b-4e54-bbc3-bb59ae8f5cb5%26response_type%3Dtoken%26scope%3Dpayments%26redirect_uri%3Dhttp%253A%252F%252F127.0.0.1%252Fbank_api%252F%26state%3Dcash_yeah_login%26rstate%3DrK7kMGWi1Giv2l6E3HZAtpV7XfQzsQqV7RF44ezFulc&amp;app-name=Cash+Yeah!&amp;appid=5a220f88e4b049f56787bc1a&amp;org=philippine-national-bank&amp;orgid=5a1d642de4b049f5677fe680&amp;catalog=sb&amp;catalogid=59dc3e71e4b049f56735321d&amp;transid=114669969</string>
+    <string name="unionbank_login_uri">https://api-uat.unionbankph.com/partners/sb/convergent/v1/oauth2/authorize?client_id=1ee8131e-b52b-4e54-bbc3-bb59ae8f5cb5&amp;response_type=token&amp;scope=payments&amp;redirect_uri=http%3A%2F%2F127.0.0.1%2Fbank_api%2F&amp;state=cash_yeah_login</string>
 
     <string name="script_credentials_pmelemos">javascript:setTimeout(function(){document.getElementById(\"username\").value=\"pmelemos\";document.getElementById(\"password\").value=\"password\";},500);</string>
 </resources>

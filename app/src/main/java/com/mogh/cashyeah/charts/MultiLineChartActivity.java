@@ -104,6 +104,7 @@ public class MultiLineChartActivity extends ChartBaseActivity
         mChart.setDrawGridBackground(false);
         mChart.getDescription().setEnabled(false);
         mChart.setDrawBorders(true);
+        mChart.setBorderColor(Color.LTGRAY);
 
         mChart.getAxisLeft().setEnabled(false);
         mChart.getAxisRight().setDrawAxisLine(false);

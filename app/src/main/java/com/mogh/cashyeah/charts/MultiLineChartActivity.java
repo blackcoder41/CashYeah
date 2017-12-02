@@ -2,8 +2,15 @@ package com.mogh.cashyeah.charts;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +30,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.mogh.cashyeah.R;
+import com.mogh.cashyeah.activities.SpeechScreen;
 import com.mogh.cashyeah.charts.models.TransactionHistoryController;
 import com.mogh.cashyeah.charts.models.TransactionHistoryItem;
 //import com.mogh.cashyeah.services.connection.controller.TransactionHistoryController;
@@ -37,7 +45,7 @@ import java.util.List;
  * Created by vergilsantos on 02/12/2017.
  */
 
-public class MultiLineChartActivity extends ChartBaseActivity
+public class MultiLineChartActivity extends ChartBaseActivity implements NavigationView.OnNavigationItemSelectedListener
 {
 
     private LineChart mChart;
@@ -80,7 +88,31 @@ public class MultiLineChartActivity extends ChartBaseActivity
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_linechart);
+        setContentView(R.layout.activity_main_chart);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+
+                Intent speechIntent = new Intent(getApplicationContext(), SpeechScreen.class);
+                startActivity(speechIntent);
+            }
+        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         mChart = (LineChart) findViewById(R.id.chart1);
 
@@ -256,5 +288,11 @@ public class MultiLineChartActivity extends ChartBaseActivity
         d.setCircleColor(color);
 
         return d;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
+        return false;
     }
 }

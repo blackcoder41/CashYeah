@@ -40,6 +40,8 @@ public class TransactionHistoryScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_history_screen);
 
+        setTitle("Transaction History");
+
         mListView = (ListView) findViewById(R.id.listTxnHistory);
 
         mBalances = new ArrayList<>();
@@ -77,8 +79,8 @@ public class TransactionHistoryScreen extends AppCompatActivity {
                                 //ArrayList<HashMap<Integer, String>> row = new ArrayList<HashMap<Integer, String>();
                                 HashMap<Integer, String> pair = new HashMap<Integer, String>();
                                 pair.put(DESCRIPTION, item.get("description").toString());
-                                pair.put(DATE, item.get("description").toString());
-                                pair.put(AMOUNT, item.get("description").toString());
+                                pair.put(DATE, item.get("time").toString());
+                                pair.put(AMOUNT, item.get("amount").toString());
                                 //row.add(pair);
 
 

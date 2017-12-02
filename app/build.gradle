@@ -12,10 +12,34 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "IBM_CLIENT_ID", '"009905ac-9baa-454f-9a00-f6ae04b334b3"')
+            buildConfigField("String", "IBM_CLIENT_SECRET", '"aL2uG5dT6iR4hS6gU3aP2uL0sK2xV5eB5pC1gQ4iF8dQ2aL6hJ"')
+            buildConfigField("String", "ENVIRONMENT", '"https://api-uat.unionbankph.com/"')
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "IBM_CLIENT_ID", '"009905ac-9baa-454f-9a00-f6ae04b334b3"')
+            buildConfigField("String", "IBM_CLIENT_SECRET", '"aL2uG5dT6iR4hS6gU3aP2uL0sK2xV5eB5pC1gQ4iF8dQ2aL6hJ"')
+            buildConfigField("String", "ENVIRONMENT", '"https://api-uat.unionbankph.com/"')
+//            signingConfig signingConfigs.release
         }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
     }
 }
 
@@ -32,6 +56,19 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     compile 'joda-time:joda-time:2.9.4'
+
+    compile 'com.google.firebase:firebase-core:11.6.0'
+    compile 'com.google.android.gms:play-services:11.6.0'
+
+    // Automatically pulls in core SDK
+    compile group: 'com.ibm.mobilefirstplatform.clientsdk.android',
+            name: 'push',
+            version: '3.+',
+            ext: 'aar',
+            transitive: true
+
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
 
     testCompile 'junit:junit:4.12'
 }

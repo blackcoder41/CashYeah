@@ -23,13 +23,15 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.mogh.cashyeah.R;
-import com.mogh.cashyeah.charts.models.TransactionHistoryController;
+//import com.mogh.cashyeah.charts.models.TransactionHistoryController;
 import com.mogh.cashyeah.charts.models.TransactionHistoryItem;
+import com.mogh.cashyeah.services.con.controller.TransactionHistoryController;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -172,8 +174,8 @@ public class MultiLineChartActivity extends ChartBaseActivity
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        mChart.getAxisLeft() .setDrawGridLines(true);
-        mChart.getAxisRight() .setDrawGridLines(true);
+        mChart.getAxisLeft().setDrawGridLines(true);
+        mChart.getAxisRight().setDrawGridLines(true);
 
         xAxis.setValueFormatter(new IAxisValueFormatter()
         {
@@ -241,50 +243,110 @@ public class MultiLineChartActivity extends ChartBaseActivity
 //        tvX.setText("" + (mSeekBarX.getProgress()));
 //        tvY.setText("" + (mSeekBarY.getProgress()));
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        final ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
 
-        List<TransactionHistoryItem> transactionHistoryItems = new TransactionHistoryController().getTransactionHistory();
-
-        for (int z = 0; z < 3; z++)
+//        List<TransactionHistoryItem> transactionHistoryItems = new TransactionHistoryController().getTransactionHistory();
+        new TransactionHistoryController().getTransactionHistory("", new TransactionHistoryController.GetTransactionHistoryCallback()
         {
+            @Override
+            public void getTransactionHistorySuccessful(LinkedList<TransactionHistoryItem> transactionHistoryItems)
+            {
+                for (int z = 0; z < 3; z++)
+                {
 
-            ArrayList<Entry> values = new ArrayList<Entry>();
+                    ArrayList<Entry> values = new ArrayList<Entry>();
 
 //            for (int i = 0; i < mSeekBarX.getProgress(); i++) {
 //                double val = (Math.random() * mSeekBarY.getProgress()) + 3;
 //                values.add(new Entry(i, (float) val));
 //            }
 
-            int index = 0;
-            Iterator<TransactionHistoryItem> iter = transactionHistoryItems.iterator();
-            while (iter.hasNext())
-            {
-                TransactionHistoryItem item = iter.next();
-                values.add(new Entry(index, Float.valueOf(item.getAmount())));
-                index += 1;
+                    int index = 0;
+                    Iterator<TransactionHistoryItem> iter = transactionHistoryItems.iterator();
+                    while (iter.hasNext())
+                    {
+                        TransactionHistoryItem item = iter.next();
+                        values.add(new Entry(index, Float.valueOf(item.getAmount())));
+                        index += 1;
+                    }
+
+                    LineDataSet d = new LineDataSet(values, "DataSet " + (z + 1));
+                    d.setLineWidth(5f);
+                    d.setCircleRadius(0f);
+
+                    int color = mColors[z % mColors.length];
+                    if (z == 2)
+                    {
+                        d.setColor(Color.rgb(0, 0, 255));
+                        d.setCircleColor(Color.rgb(0, 0, 255));
+                    } else if (z == 1)
+                    {
+                        d.setColor(Color.RED);
+                        d.setCircleColor(Color.RED);
+                    }
+
+                    dataSets.add(d);
+                }
+
+                LineData data = new LineData(dataSets);
+                data.removeDataSet(0);
+                mChart.setData(data);
+                mChart.invalidate();
             }
 
-            LineDataSet d = new LineDataSet(values, "DataSet " + (z + 1));
-            d.setLineWidth(5f);
-            d.setCircleRadius(0f);
+            @Override
+            public void getTransactionHistoryFailed()
+            {
 
-            int color = mColors[z % mColors.length];
-            if (z == 2)
-            {
-                d.setColor(Color.rgb(0, 0, 255));
-                d.setCircleColor(Color.rgb(0, 0, 255));
-            } else if (z == 1)
-            {
-                d.setColor(Color.RED);
-                d.setCircleColor(Color.RED);
             }
 
-            dataSets.add(d);
-        }
+            @Override
+            public void tokenSessionInvalid(String message)
+            {
 
-        LineData data = new LineData(dataSets);
-        data.removeDataSet(0);
-        mChart.setData(data);
-        mChart.invalidate();
+            }
+        });
+
+//        for (int z = 0; z < 3; z++)
+//        {
+//
+//            ArrayList<Entry> values = new ArrayList<Entry>();
+//
+////            for (int i = 0; i < mSeekBarX.getProgress(); i++) {
+////                double val = (Math.random() * mSeekBarY.getProgress()) + 3;
+////                values.add(new Entry(i, (float) val));
+////            }
+//
+//            int index = 0;
+//            Iterator<TransactionHistoryItem> iter = transactionHistoryItems.iterator();
+//            while (iter.hasNext())
+//            {
+//                TransactionHistoryItem item = iter.next();
+//                values.add(new Entry(index, Float.valueOf(item.getAmount())));
+//                index += 1;
+//            }
+//
+//            LineDataSet d = new LineDataSet(values, "DataSet " + (z + 1));
+//            d.setLineWidth(5f);
+//            d.setCircleRadius(0f);
+//
+//            int color = mColors[z % mColors.length];
+//            if (z == 2)
+//            {
+//                d.setColor(Color.rgb(0, 0, 255));
+//                d.setCircleColor(Color.rgb(0, 0, 255));
+//            } else if (z == 1)
+//            {
+//                d.setColor(Color.RED);
+//                d.setCircleColor(Color.RED);
+//            }
+//
+//            dataSets.add(d);
+//        }
+//
+//        LineData data = new LineData(dataSets);
+//        data.removeDataSet(0);
+//        mChart.setData(data);
+//        mChart.invalidate();
     }
 }

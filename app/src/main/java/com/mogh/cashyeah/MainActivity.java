@@ -17,7 +17,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
+import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPush;
+import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushException;
+import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationListener;
+import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushResponseListener;
+import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPSimplePushNotification;
 import com.mogh.cashyeah.activities.SpeechScreen;
 import com.mogh.cashyeah.charts.MultiLineChartActivity;
 import com.mogh.cashyeah.models.BranchResponse;
@@ -34,9 +42,11 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private Button mBtnRequest;
     private TextView mTxtResponse;
 
+    private MFPPushNotificationListener notificationListener;
     private Context mContext;
 
     @Override
@@ -72,6 +82,62 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FirebaseApp.initializeApp(this);
+
+        // Initialize the SDK
+        BMSClient.getInstance().initialize(this, BMSClient.REGION_US_SOUTH);
+//Initialize client Push SDK
+
+        final MFPPush push = MFPPush.getInstance();
+        push.initialize(getApplicationContext(), "7294203d-0806-42a0-984b-43e416f2cead", "69d18c69-01a3-4c55-9dfc-358fa1dc3dbe");
+
+        //Register Android devices
+        push.registerDevice(new MFPPushResponseListener<String>()
+        {
+
+            @Override
+            public void onSuccess(String response)
+            {
+                //handle successful device registration here
+                System.out.println("onSuccess");
+//                Toast.makeText(getApplicationContext(), "onSuccess", Toast.LENGTH_SHORT).show();
+                push.listen(notificationListener);
+            }
+
+            @Override
+            public void onFailure(MFPPushException ex)
+            {
+                //handle failure in device registration here
+                System.out.println("onFailure");
+//                Toast.makeText(getApplicationContext(), "onFailure", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Create notification listener and enable pop up notification when a message is received
+        notificationListener = new MFPPushNotificationListener()
+        {
+            @Override
+            public void onReceive(final MFPSimplePushNotification message)
+            {
+                Log.i(TAG, "Received a Push Notification: " + message.toString());
+                runOnUiThread(new Runnable()
+                {
+                    public void run()
+                    {
+//                        new android.app.AlertDialog.Builder(getApplicationContext())
+//                                .setTitle("Received a Push Notification")
+//                                .setMessage(message.getAlert())
+//                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int whichButton) {
+//                                    }
+//                                })
+//                                .show();
+                        Toast.makeText(getApplicationContext(), "Received a Push Notification: " + message.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        };
     }
 
     @Override

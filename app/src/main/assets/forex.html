@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Foreign Exchange</title>
+    <style>
+#text_output {
+	width: 100%;
+}
+
+html {
+	height: 100%;
+}
+body {
+	/** background: #f4f4f4 url(speak_animation.gif) center no-repeat; **/
+	height: 100%;
+	color: #fff;
+	background-color: #fc8b25;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+	position: relative;
+
+}
+
+td {
+	padding: 20px;
+	font-size: 20px;
+	color: #fff;
+}
+
+</style>
+    <script src="jquery.js"></script>
+</head>
+<body>
+
+
+<table id="forex">
+    <tr>
+        <td>Currency</td>
+        <td>Buying</td>
+        <td>Selling</td>
+    </tr>
+</table>
+
+
+
+<script>
+
+$(function() {
+
+
+
+
+	$('#get_atm').click(function() {
+		// Request with custom header
+		$.ajax({
+			url: 'https://api-uat.unionbankph.com/partners/sb/locators/v1/atms',
+			headers: {
+				'accept': 'application/json',
+				'x-ibm-client-id': '1ee8131e-b52b-4e54-bbc3-bb59ae8f5cb5',
+				'x-ibm-client-secret': 'T3tO4bM8wP1wE3uX8jD0iB1pL7xM6uY2gJ7tI8mO3xJ3mI2kY0'
+			},
+			success: function(data) {
+				$('#text_output').val(JSON.stringify(data));
+			}
+		});
+	});
+
+	$('#get_branch').click(function() {
+		// Request with custom header
+		$.ajax({
+			url: 'https://api-uat.unionbankph.com/partners/sb/locators/v1/branches',
+			headers: {
+				'accept': 'application/json',
+				'x-ibm-client-id': '1ee8131e-b52b-4e54-bbc3-bb59ae8f5cb5',
+				'x-ibm-client-secret': 'T3tO4bM8wP1wE3uX8jD0iB1pL7xM6uY2gJ7tI8mO3xJ3mI2kY0'
+			},
+			success: function(data) {
+				$('#text_output').val(JSON.stringify(data));
+			}
+		});
+	});
+
+		// Get forex
+		// Request with custom header
+		$.ajax({
+			url: 'https://api-uat.unionbankph.com/partners/sb/forex/v1/rates',
+			headers: {
+				'accept': 'application/json',
+				'x-ibm-client-id': '1ee8131e-b52b-4e54-bbc3-bb59ae8f5cb5',
+				'x-ibm-client-secret': 'T3tO4bM8wP1wE3uX8jD0iB1pL7xM6uY2gJ7tI8mO3xJ3mI2kY0'
+			},
+			success: function(data) {
+				$("#forex").append();
+
+				for (var x in data) {
+					var row = data[x];
+					_row = $("<tr>");
+
+					_col = $("<td>").text(row["name"]);
+					_row.append(_col);
+
+					_col = $("<td>").text(row["buying"]);
+					_row.append(_col);
+
+					_col = $("<td>").text(row["selling"]);
+					_row.append(_col);
+
+					$("#forex").append(_row);
+				}
+
+				android.speak("Hi! These are the foreign exchanges for today.");
+
+				console.log(data);
+			}
+		});
+
+
+
+});
+
+
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-package com.mogh.cashyeah.services.con;
+package com.mogh.cashyeah.services.connection;
 
 /**
  * Created by vergilsantos on 02/12/2017.

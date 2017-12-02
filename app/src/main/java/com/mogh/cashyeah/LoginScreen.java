@@ -1,5 +1,8 @@
 package com.mogh.cashyeah;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -19,8 +22,10 @@ import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushException;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPSimplePushNotification;
+import com.mogh.cashyeah.charts.MultiLineChartActivity;
 
-public class LoginScreen extends AppCompatActivity {
+public class LoginScreen extends AppCompatActivity
+{
 
     private static final String TAG = LoginScreen.class.getSimpleName();
     private Context mContext;
@@ -29,7 +34,8 @@ public class LoginScreen extends AppCompatActivity {
     private MFPPushNotificationListener notificationListener;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
@@ -40,25 +46,30 @@ public class LoginScreen extends AppCompatActivity {
         mWebView.addJavascriptInterface(new WebViewJS(this), "android");
 
 
-        mWebView.setWebViewClient(new WebViewClient() {
+        mWebView.setWebViewClient(new WebViewClient()
+        {
 
             @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error)
+            {
                 super.onReceivedError(view, request, error);
             }
 
             @Override
-            public void onPageFinished(WebView view, String url) {
+            public void onPageFinished(WebView view, String url)
+            {
                 super.onPageFinished(view, url);
 
-                if (url.indexOf("access_token") >= 0 ) {
+                if (url.indexOf("access_token") >= 0)
+                {
 
                     Intent intent = new Intent(mContext, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
 
-                if (url.indexOf("orgid") >= 0 ) {
+                if (url.indexOf("orgid") >= 0)
+                {
 
                     mWebView.loadUrl(getString(R.string.script_credentials_pmelemos));
 
@@ -71,7 +82,7 @@ public class LoginScreen extends AppCompatActivity {
 
         });
 
-        mWebView.loadUrl( getString(R.string.unionbank_login_uri) );
+        mWebView.loadUrl(getString(R.string.unionbank_login_uri));
 
         FirebaseApp.initializeApp(this);
 
@@ -115,31 +126,48 @@ public class LoginScreen extends AppCompatActivity {
                 {
                     public void run()
                     {
-//                        new android.app.AlertDialog.Builder(getApplicationContext())
-//                                .setTitle("Received a Push Notification")
-//                                .setMessage(message.getAlert())
-//                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int whichButton) {
-//                                    }
-//                                })
-//                                .show();
-                        Toast.makeText(getApplicationContext(), "Received a Push Notification: " + message.toString(), Toast.LENGTH_SHORT).show();
+                        Context context = getApplicationContext();
+                        NotificationManager notificationManager = (NotificationManager) context
+                                .getSystemService(NOTIFICATION_SERVICE);
+
+                        Notification updateComplete = new Notification();
+                        updateComplete.icon = android.R.drawable.stat_notify_sync;
+                        updateComplete.tickerText = message.getAlert();
+                        updateComplete.when = System.currentTimeMillis();
+
+                        Intent notificationIntent = new Intent(context,
+                                MultiLineChartActivity.class);
+                        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+                                notificationIntent, 0);
+
+                        String contentTitle = message.getAlert();
+                        Notification.Builder builder = new Notification.Builder(getApplicationContext());
+
+                        builder.setSmallIcon(R.mipmap.ic_launcher)
+                                .setContentTitle(contentTitle)
+                                .setContentIntent(contentIntent);
+
+                        Notification notification = builder.getNotification();
+                        notificationManager.notify(R.mipmap.ic_launcher, notification);
                     }
                 });
             }
         };
     }
 
-    public class WebViewJS {
+    public class WebViewJS
+    {
         Context mContext;
 
 
-        public WebViewJS(Context c) {
+        public WebViewJS(Context c)
+        {
             mContext = c;
         }
 
         @JavascriptInterface
-        public void loginRedirect () {
+        public void loginRedirect()
+        {
 
 
         }

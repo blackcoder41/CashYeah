@@ -1,13 +1,12 @@
-package com.mogh.cashyeah.services.con.controller;
+package com.mogh.cashyeah.services.connection.controller;
 
 import android.util.Log;
 
 import com.mogh.cashyeah.charts.models.TransactionHistoryItem;
-import com.mogh.cashyeah.services.con.TokenSessionCallback;
-import com.mogh.cashyeah.services.con.models.TransactionHistoryRequest;
-import com.mogh.cashyeah.services.con.services.TransactionHistoryService;
+import com.mogh.cashyeah.services.connection.TokenSessionCallback;
+import com.mogh.cashyeah.services.connection.models.TransactionHistoryRequest;
+import com.mogh.cashyeah.services.connection.services.TransactionHistoryService;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 

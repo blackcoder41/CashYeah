@@ -1,4 +1,4 @@
-package com.mogh.cashyeah.services.con.services;
+package com.mogh.cashyeah.services.connection.services;
 
 import com.mogh.cashyeah.charts.models.TransactionHistoryItem;
 

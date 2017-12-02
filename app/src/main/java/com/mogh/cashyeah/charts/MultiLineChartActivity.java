@@ -25,7 +25,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.mogh.cashyeah.R;
 //import com.mogh.cashyeah.charts.models.TransactionHistoryController;
 import com.mogh.cashyeah.charts.models.TransactionHistoryItem;
-import com.mogh.cashyeah.services.con.controller.TransactionHistoryController;
+import com.mogh.cashyeah.services.connection.controller.TransactionHistoryController;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

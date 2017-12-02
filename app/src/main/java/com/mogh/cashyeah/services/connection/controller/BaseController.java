@@ -1,8 +1,8 @@
-package com.mogh.cashyeah.services.con.controller;
+package com.mogh.cashyeah.services.connection.controller;
 
 import com.mogh.cashyeah.BuildConfig;
-import com.mogh.cashyeah.services.con.models.APIResponse;
-import com.mogh.cashyeah.services.con.models.ErrorData;
+import com.mogh.cashyeah.services.connection.models.APIResponse;
+import com.mogh.cashyeah.services.connection.models.ErrorData;
 
 import java.io.IOException;
 import java.security.cert.CertificateException;

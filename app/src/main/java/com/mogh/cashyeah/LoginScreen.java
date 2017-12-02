@@ -74,7 +74,7 @@ public class LoginScreen extends AppCompatActivity
                     mWebView.loadUrl(getString(R.string.script_credentials_pmelemos));
 
                     Log.d("DEBUG_TAG", url);
-                    Log.d("DEBUG_TAG", getString(R.string.script_credentials_pmelemos));
+                    Log.d("DEBUG_TAG", getString(R.string.script_credentials_oralhernandez));
 
                 }
             }

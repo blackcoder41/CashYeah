@@ -1,4 +1,4 @@
-    apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
@@ -56,9 +56,13 @@ dependencies {
             ext: 'aar',
             transitive: true
 
-
-
     //apply plugin: 'com.google.gms.google-services'
+    
+
+
+
+
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -67,12 +71,10 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     compile 'joda-time:joda-time:2.9.4'
     compile 'com.google.firebase:firebase-core:11.6.0'
-
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
-
     compile 'com.android.volley:volley:1.0.0'
 
-    testCompile 'junit:junit:4.12'
-
     apply plugin: 'com.google.gms.google-services'
+
+    testCompile 'junit:junit:4.12'
 }

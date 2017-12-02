@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 import com.android.volley.Request;
@@ -22,10 +23,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
+import static com.mogh.cashyeah.TransactionJSON.*;
+
 public class TransactionHistoryScreen extends AppCompatActivity {
 
     ListView mListView;
-    ArrayList<String> mBalances;
+    ArrayList<HashMap<Integer, String>> mBalances;
     TransactionHistoryAdapter mAdapter;
 
     final String BASE_URL = "http://cherrypaperdesigns.com/";
@@ -40,7 +43,7 @@ public class TransactionHistoryScreen extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.listTxnHistory);
 
         mBalances = new ArrayList<>();
-        mAdapter = new TransactionHistoryAdapter(this, R.layout.row_transaction, R.id.row_amount, mBalances);
+        mAdapter = new TransactionHistoryAdapter(this, R.layout.row_transaction, mBalances);
         mListView.setAdapter(mAdapter);
 
 
@@ -61,7 +64,7 @@ public class TransactionHistoryScreen extends AppCompatActivity {
                         Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
                         toast.show();
 
-                        if (true) return;
+
 
                         // Go through the json array
                         for (int i=0; i<response.length(); i++) {
@@ -70,14 +73,20 @@ public class TransactionHistoryScreen extends AppCompatActivity {
                             try {
                                 // Get one row
                                 item = (JSONObject) response.get(i);
-                                String strAmount = item.get("amount").toString();
 
-                                // Add image to listview
-                                TransactionHistoryScreen.this.mBalances.add( strAmount );
+                                //ArrayList<HashMap<Integer, String>> row = new ArrayList<HashMap<Integer, String>();
+                                HashMap<Integer, String> pair = new HashMap<Integer, String>();
+                                pair.put(DESCRIPTION, item.get("description").toString());
+                                pair.put(DATE, item.get("description").toString());
+                                pair.put(AMOUNT, item.get("description").toString());
+                                //row.add(pair);
 
-                                // !important update the listview
-                                BaseAdapter baseAdapter = (BaseAdapter) TransactionHistoryScreen.this.mListView.getAdapter();
-                                baseAdapter.notifyDataSetChanged();
+
+
+                                // Add to list view
+                                TransactionHistoryScreen.this.mBalances.add( pair );
+
+
 
 
                             } catch (JSONException e) {
@@ -85,6 +94,10 @@ public class TransactionHistoryScreen extends AppCompatActivity {
                             }
 
                         }
+
+                        // !important update the listview
+                        BaseAdapter baseAdapter = (BaseAdapter) TransactionHistoryScreen.this.mListView.getAdapter();
+                        baseAdapter.notifyDataSetChanged();
 
 
                     }
@@ -96,9 +109,8 @@ public class TransactionHistoryScreen extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
 
                         String msg = "Encountered an error. " + error.getMessage();
-                        Toast eventCountPrompt = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
-                        eventCountPrompt.show();
-
+                        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
+                        toast.show();
 
                     }
                 });

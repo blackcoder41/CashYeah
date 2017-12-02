@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "849791665354",
+    "firebase_url": "https://cashyeah-f5df9.firebaseio.com",
+    "project_id": "cashyeah-f5df9",
+    "storage_bucket": "cashyeah-f5df9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849791665354:android:d98ed04b7b296aa2",
+        "android_client_info": {
+          "package_name": "com.mogh.cashyeah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849791665354-ngs525k6ebsph6miuij44u94c603hqdn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7wAlp-Km7IM7ZEn7nyyXeS55GYupFtRU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

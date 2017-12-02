@@ -48,17 +48,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support:design:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
-    compile 'joda-time:joda-time:2.9.4'
-
-    compile 'com.google.firebase:firebase-core:11.6.0'
-    compile 'com.google.android.gms:play-services:11.6.0'
 
     // Automatically pulls in core SDK
     compile group: 'com.ibm.mobilefirstplatform.clientsdk.android',
@@ -67,9 +56,19 @@ dependencies {
             ext: 'aar',
             transitive: true
 
-    compile 'com.google.code.gson:gson:2.4'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
 
+
+    //apply plugin: 'com.google.gms.google-services'
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support:design:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    compile 'joda-time:joda-time:2.9.4'
+    compile 'com.google.firebase:firebase-core:11.6.0'
+
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
     testCompile 'junit:junit:4.12'
 
     apply plugin: 'com.google.gms.google-services'

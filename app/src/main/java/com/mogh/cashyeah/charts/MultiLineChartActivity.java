@@ -30,6 +30,8 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.mogh.cashyeah.R;
+import com.mogh.cashyeah.TransactionHistoryScreen;
+import com.mogh.cashyeah.TxnHistory;
 import com.mogh.cashyeah.activities.SpeechScreen;
 import com.mogh.cashyeah.charts.models.TransactionHistoryController;
 import com.mogh.cashyeah.charts.models.TransactionHistoryItem;
@@ -122,7 +124,8 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
             public void onClick(View v)
             {
                 // TODO transition to traditional transaction history
-                Toast.makeText(getApplicationContext(), "transition to traditional transaction history", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "transition to traditional transaction history", Toast.LENGTH_SHORT).show();
+                showTransactionHistory();
             }
         });
 
@@ -294,5 +297,11 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
         return false;
+    }
+
+    public void showTransactionHistory() {
+
+        Intent txtHistory = new Intent(this, TransactionHistoryScreen.class);
+        startActivity(txtHistory);
     }
 }

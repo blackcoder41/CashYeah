@@ -13,23 +13,23 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="20dp"/>
 
-    <Button
+    <ImageView
         android:id="@+id/btn_start_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/chart1"
         android:onClick="startDateButtonClicked"
-        android:text="Start Date"/>
+        android:src="@android:drawable/ic_menu_my_calendar"/>
 
-    <Button
+    <ImageView
         android:id="@+id/btn_end_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/chart1"
         android:onClick="endDateButtonClicked"
-        android:text="End Date"/>
+        android:src="@android:drawable/ic_menu_my_calendar"/>
 </RelativeLayout>

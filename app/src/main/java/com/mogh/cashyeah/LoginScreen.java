@@ -63,7 +63,7 @@ public class LoginScreen extends AppCompatActivity
                 if (url.indexOf("access_token") >= 0)
                 {
 
-                    Intent intent = new Intent(mContext, MainActivity.class);
+                    Intent intent = new Intent(mContext, MultiLineChartActivity.class);
                     startActivity(intent);
                     finish();
                 }

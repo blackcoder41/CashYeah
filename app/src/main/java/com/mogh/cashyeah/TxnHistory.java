@@ -51,9 +51,6 @@ public class TxnHistory extends AppCompatActivity {
 
                 List<TransactionHistoryItem> txnHis = response.body();
                 String txnHistory =  txnHis.get(0).getClientId();
-
-
-
             }
 
             @Override

@@ -5,8 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -14,7 +14,6 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
@@ -83,26 +82,17 @@ public class LoginScreen extends AppCompatActivity
 
                 if (url.indexOf("orgid") >= 0)
                 {
-
                     mWebView.loadUrl(getString(R.string.script_credentials_oralhernandez));
 
                     Log.d("DEBUG_TAG", url);
                     Log.d("DEBUG_TAG", getString(R.string.script_credentials_oralhernandez));
-
                 }
 
                 mLoginPortalLoaded++;
-
-
             }
-
-
         });
 
-        //mWebView.loadUrl("file:///android_asset/greetings.html");
         mWebView.loadUrl(getString(R.string.unionbank_login_uri));
-        //mWebView.loadUrl(getString(R.string.unionbank_login_uri));
-
         FirebaseApp.initializeApp(this);
 
         // Initialize the SDK
@@ -119,18 +109,13 @@ public class LoginScreen extends AppCompatActivity
             @Override
             public void onSuccess(String response)
             {
-                //handle successful device registration here
-                System.out.println("onSuccess");
-//                Toast.makeText(getApplicationContext(), "onSuccess", Toast.LENGTH_SHORT).show();
                 push.listen(notificationListener);
             }
 
             @Override
             public void onFailure(MFPPushException ex)
             {
-                //handle failure in device registration here
                 System.out.println("onFailure");
-//                Toast.makeText(getApplicationContext(), "onFailure", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -178,7 +163,6 @@ public class LoginScreen extends AppCompatActivity
     {
         Context mContext;
 
-
         public WebViewJS(Context c)
         {
             mContext = c;
@@ -187,8 +171,7 @@ public class LoginScreen extends AppCompatActivity
         @JavascriptInterface
         public void loginRedirect()
         {
-
-
+            // do nothing
         }
     }
 }

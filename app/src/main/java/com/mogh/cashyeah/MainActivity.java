@@ -64,9 +64,6 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-
                 Intent speechIntent = new Intent(mContext, SpeechScreen.class);
                 startActivity(speechIntent);
             }
@@ -153,16 +150,10 @@ public class MainActivity extends AppCompatActivity
 
         if (true) return;
 
-
-
         call.enqueue(new Callback<List<BranchResponse>>() {
             @Override
             public void onResponse(Call<List<BranchResponse>> call, Response<List<BranchResponse>> response) {
-
-//                List<BranchResponse> branches = response.body();
-//                String n = branches.get(0).getData().get(0).getName();
-//                mTxtResponse.setText(n);
-
+                // for testing purposes
             }
 
             @Override

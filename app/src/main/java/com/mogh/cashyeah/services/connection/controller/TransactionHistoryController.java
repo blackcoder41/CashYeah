@@ -34,7 +34,6 @@ public class TransactionHistoryController extends BaseController<TransactionHist
         final TransactionHistoryService transactionHistoryService = createService(TransactionHistoryService.class);
 
         TransactionHistoryRequest request = new TransactionHistoryRequest();
-//        request.setClientRequestID(ApiUtils.generateClientReqID());
         request.setTokenId(tokenId);
 
         final Call<List<TransactionHistoryItem>> call =
@@ -45,14 +44,13 @@ public class TransactionHistoryController extends BaseController<TransactionHist
             @Override
             public void onResponse(Call<List<TransactionHistoryItem>> call, Response<List<TransactionHistoryItem>> response)
             {
-                Log.d(TAG, "announcements response: " + response.body());
-//                getAnnouncementsCallback.getAnnouncementsSuccessful(response.body().getAnnouncements());
+                Log.d(TAG, "transaction history response: " + response.body());
             }
 
             @Override
             public void onFailure(Call<List<TransactionHistoryItem>> call, Throwable t)
             {
-                Log.d(TAG, "login response: " + t.getMessage());
+                Log.d(TAG, "transaction history response failed: " + t.getMessage());
                 getAnnouncementsCallback.getTransactionHistoryFailed();
             }
         });

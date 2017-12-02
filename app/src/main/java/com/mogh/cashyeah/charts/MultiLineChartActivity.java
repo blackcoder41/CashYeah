@@ -2,12 +2,20 @@ package com.mogh.cashyeah.charts;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +37,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.mogh.cashyeah.MainActivity;
 import com.mogh.cashyeah.R;
 import com.mogh.cashyeah.TransactionHistoryScreen;
 import com.mogh.cashyeah.TxnHistory;
@@ -178,6 +187,43 @@ public class MultiLineChartActivity extends ChartBaseActivity implements Navigat
         });
 
         onProgressChanged();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        sendNotification("Watch out! Your current balance is running low.");
+    }
+
+    private void sendNotification(String messageBody) {
+        Intent intent = new Intent(this, MultiLineChartActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        intent.putExtra("AnotherActivity", TrueOrFalse);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        Bitmap largeIcon = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                R.mipmap.ic_launcher_round);
+
+        Bitmap bigSale = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                R.drawable.big_sale);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+//                .setLargeIcon(largeIcon)/*Notification icon image*/
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+//                .setContentTitle(messageBody)
+                .setStyle(new NotificationCompat.BigPictureStyle()
+                        .bigPicture(bigSale))/*Notification with Image*/
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
     public void startDateButtonClicked(View view)

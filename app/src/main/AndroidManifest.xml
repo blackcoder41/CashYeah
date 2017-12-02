@@ -19,7 +19,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/SplashTheme">
 
         </activity>
         <activity

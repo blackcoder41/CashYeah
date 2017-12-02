@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -31,6 +32,8 @@ public class LoginScreen extends AppCompatActivity
     private Context mContext;
     private WebView mWebView;
 
+    private int mLoginPortalLoaded;
+
     private MFPPushNotificationListener notificationListener;
 
     @Override
@@ -39,11 +42,15 @@ public class LoginScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
+
         mContext = this;
+
+        mLoginPortalLoaded = 0;
 
         mWebView = (WebView) findViewById(R.id.webView);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.addJavascriptInterface(new WebViewJS(this), "android");
+
 
 
         mWebView.setWebViewClient(new WebViewClient()
@@ -60,9 +67,15 @@ public class LoginScreen extends AppCompatActivity
             {
                 super.onPageFinished(view, url);
 
+                Log.d("DEBUG_TAG", url);
+
+                if (mLoginPortalLoaded < 1)
+                {
+                    mWebView.setVisibility(View.VISIBLE);
+                }
+
                 if (url.indexOf("access_token") >= 0)
                 {
-
                     Intent intent = new Intent(mContext, MultiLineChartActivity.class);
                     startActivity(intent);
                     finish();
@@ -71,18 +84,24 @@ public class LoginScreen extends AppCompatActivity
                 if (url.indexOf("orgid") >= 0)
                 {
 
-                    mWebView.loadUrl(getString(R.string.script_credentials_pmelemos));
+                    mWebView.loadUrl(getString(R.string.script_credentials_oralhernandez));
 
                     Log.d("DEBUG_TAG", url);
                     Log.d("DEBUG_TAG", getString(R.string.script_credentials_oralhernandez));
 
                 }
+
+                mLoginPortalLoaded++;
+
+
             }
 
 
         });
 
+        //mWebView.loadUrl("file:///android_asset/greetings.html");
         mWebView.loadUrl(getString(R.string.unionbank_login_uri));
+        //mWebView.loadUrl(getString(R.string.unionbank_login_uri));
 
         FirebaseApp.initializeApp(this);
 

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Summit</title>
+
+    <style>
+html {
+	height: 100%;
+}
+body {
+	background: #fc8b25;
+	font-family: "Trebuchet Ms", sans-serif;
+	height: 100%;
+}
+
+#greeting {
+	font-size: 18pt;
+	text-align: center;
+	color: #fff;
+
+	vertical-align: middle;
+	border: 1px solid #fc8b25;
+	height: 100%;
+
+	display: table-cell;
+	vertical-align: middle;
+
+}
+
+table {
+	height: 100%;
+	width: 100%;
+}
+
+td {
+	text-align: center;
+	color: #fff;
+	font-size: 18pt;
+}
+</style>
+
+</head>
+<body>
+
+
+
+
+<table>
+    <tr>
+        <td id="greeting"></td>
+    </tr>
+</table>
+
+<script>
+var today = new Date()
+var curHr = today.getHours()
+
+if (curHr < 12) {
+  document.getElementById("greeting").innerHTML = "Good morning . . .";
+} else if (curHr < 18) {
+  document.getElementById("greeting").innerHTML = "Good afternoon . . .";
+} else {
+  document.getElementById("greeting").innerHTML = "Good evening . . .";
+}
+</script>
+</body>
+</html>

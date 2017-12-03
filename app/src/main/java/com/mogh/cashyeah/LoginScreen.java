@@ -75,6 +75,9 @@ public class LoginScreen extends AppCompatActivity
 
                 if (url.indexOf("access_token") >= 0)
                 {
+
+                    mWebView.setVisibility(View.INVISIBLE);
+
                     Intent intent = new Intent(mContext, MultiLineChartActivity.class);
                     startActivity(intent);
                     finish();

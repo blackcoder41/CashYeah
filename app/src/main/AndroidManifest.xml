@@ -21,6 +21,11 @@
             android:name=".LoginScreen"
             android:theme="@style/SplashTheme">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".TxnHistory"
@@ -31,10 +36,6 @@
         <activity
             android:name=".activities.SpeechScreen"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <service

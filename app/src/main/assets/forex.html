@@ -40,10 +40,38 @@ td {
 	color: #fff;
 }
 
+#forex {
+
+}
+
+#loading_orange {
+	width: 48px;
+}
+
+#load_animation {
+
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+
 </style>
     <script src="jquery.js"></script>
 </head>
 <body>
+
+
+<table id="load_animation">
+    <tr>
+        <td>
+            <div>
+                <img src="loading_orange.gif" id="loading_orange" />
+                <p style="font-size:14px;">Loading . . .</p>
+            </div>
+        </td>
+    </tr>
+</table>
+
 
 
 <table id="forex">
@@ -58,7 +86,9 @@ td {
 
 <script>
 
+
 $(function() {
+
 
 
 
@@ -93,6 +123,8 @@ $(function() {
 		});
 	});
 
+		if (typeof android !== "undefined") android.speak("Hi there! Please wait while I get the foreign exchange rates");
+
 		// Get forex
 		// Request with custom header
 		$.ajax({
@@ -121,9 +153,18 @@ $(function() {
 					$("#forex").append(_row);
 				}
 
-				android.speak("Hi! These are the foreign exchanges for today.");
+				$("#forex").show();
+				$("#load_animation").hide();
+
+
+
+				if (typeof android !== "undefined") android.speak("Hi! These are the foreign exchanges for today.");
+
+
 
 				console.log(data);
+
+
 			}
 		});
 

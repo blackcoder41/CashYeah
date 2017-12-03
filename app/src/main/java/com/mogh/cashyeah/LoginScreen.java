@@ -14,6 +14,7 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
@@ -23,6 +24,8 @@ import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificatio
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPSimplePushNotification;
 import com.mogh.cashyeah.charts.MultiLineChartActivity;
+
+import org.w3c.dom.Text;
 
 public class LoginScreen extends AppCompatActivity
 {
@@ -35,6 +38,8 @@ public class LoginScreen extends AppCompatActivity
 
     private MFPPushNotificationListener notificationListener;
 
+    private TextView mTxtIntro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -45,6 +50,9 @@ public class LoginScreen extends AppCompatActivity
         mContext = this;
 
         mLoginPortalLoaded = 0;
+
+        mTxtIntro = (TextView) findViewById(R.id.txtIntro);
+
 
         mWebView = (WebView) findViewById(R.id.webView);
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -77,6 +85,7 @@ public class LoginScreen extends AppCompatActivity
                 {
 
                     mWebView.setVisibility(View.INVISIBLE);
+                    mTxtIntro.setVisibility(View.INVISIBLE);
 
                     Intent intent = new Intent(mContext, MultiLineChartActivity.class);
                     startActivity(intent);

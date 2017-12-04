@@ -42,11 +42,13 @@ public class SpeechScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speech_screen);
 
+        checkTTS();
+
         mWebView = (WebView) findViewById(R.id.webView);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.addJavascriptInterface(new SpeechScreen.WebViewJS(this), "android");
 
-        checkTTS();
+
 
         mWebView.setWebViewClient(new WebViewClient() {
 
@@ -67,7 +69,13 @@ public class SpeechScreen extends AppCompatActivity {
 
         });
 
-        mWebView.loadUrl("file:///android_asset/forex.html");
+
+    }
+
+    public void talk_back(View view) {
+
+        saySomething("Hey! How may I help you?");
+
     }
 
 
@@ -106,6 +114,8 @@ public class SpeechScreen extends AppCompatActivity {
                 startActivity(install);
             }
         }
+
+        mWebView.loadUrl("file:///android_asset/forex.html");
     }
 
     public void saySomething(String speech) {

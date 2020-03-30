@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mogh.cashyeah">
+    package="com.raketlabs.uhack">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -14,11 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.raketlabs.uhack.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LoginScreen"
+            android:name="com.raketlabs.uhack.LoginScreen"
             android:theme="@style/SplashTheme">
 
             <intent-filter>
@@ -28,13 +28,13 @@
 
         </activity>
         <activity
-            android:name=".TxnHistory"
+            android:name="com.raketlabs.uhack.TxnHistory"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".charts.MultiLineChartActivity"
+            android:name="com.raketlabs.uhack.charts.MultiLineChartActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".activities.SpeechScreen"
+            android:name="com.raketlabs.uhack.activities.SpeechScreen"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
@@ -56,10 +56,10 @@
         <activity
             android:name="com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationHandler"
             android:theme="@android:style/Theme.NoDisplay" />
-        <activity android:name=".TransactionHistoryScreen" />
+        <activity android:name="com.raketlabs.uhack.TransactionHistoryScreen" />
 
 
-        <activity android:name=".SplashScreen" android:theme="@style/SplashTheme">
+        <activity android:name="com.raketlabs.uhack.SplashScreen" android:theme="@style/SplashTheme">
 
         </activity>
     </application>

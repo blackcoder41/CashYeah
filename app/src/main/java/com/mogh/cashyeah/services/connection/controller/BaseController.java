@@ -23,20 +23,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by vergilsantos on 02/12/2017.
  */
 
-public abstract class BaseController<T extends Object>
-{
+public abstract class BaseController<T extends Object> {
     private Retrofit retrofit;
 
-    public T createService(Class clazz)
-    {
-        Interceptor interceptor = new Interceptor()
-        {
+    public T createService(Class clazz) {
+        Interceptor interceptor = new Interceptor() {
             @Override
-            public Response intercept(Chain chain) throws IOException
-            {
+            public Response intercept(Chain chain) throws IOException {
                 final Request request = chain.request().newBuilder()
-                        .addHeader("x-ibm-client-id", BuildConfig.IBM_CLIENT_ID)
-                        .addHeader("x-ibm-client-secret", BuildConfig.IBM_CLIENT_SECRET)
+                        // .addHeader("x-ibm-client-id", BuildConfig.IBM_CLIENT_ID)
+                        // .addHeader("x-ibm-client-secret", BuildConfig.IBM_CLIENT_SECRET)
                         .addHeader("Content-Type", "application/json")
                         .build();
 
@@ -60,26 +56,24 @@ public abstract class BaseController<T extends Object>
 
         try {
             // Create a trust manager that does not validate certificate chains
-            final TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+            final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
                 @Override
                 public void checkClientTrusted(
                         java.security.cert.X509Certificate[] chain,
-                        String authType) throws CertificateException
-                {
+                        String authType) throws CertificateException {
                 }
 
                 @Override
                 public void checkServerTrusted(
                         java.security.cert.X509Certificate[] chain,
-                        String authType) throws CertificateException
-                {
+                        String authType) throws CertificateException {
                 }
 
                 @Override
                 public java.security.cert.X509Certificate[] getAcceptedIssuers() {
                     return new java.security.cert.X509Certificate[0];
                 }
-            } };
+            }};
 
             // Install the all-trusting trust manager
             final SSLContext sslContext = SSLContext.getInstance("TLS");
@@ -102,10 +96,8 @@ public abstract class BaseController<T extends Object>
     }
 
 
-    protected ErrorData isInvalidToken(retrofit2.Response<? extends APIResponse> response)
-    {
-        if (response != null && response.errorBody() != null)
-        {
+    protected ErrorData isInvalidToken(retrofit2.Response<? extends APIResponse> response) {
+        if (response != null && response.errorBody() != null) {
             Response rawResponse = response.raw();
 
             return new ErrorData(rawResponse.message());

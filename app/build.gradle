@@ -1,73 +1,63 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "27.0.1"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.mogh.cashyeah"
-        minSdkVersion 16
-        targetSdkVersion 26
+        minSdkVersion 21
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "IBM_CLIENT_ID", '"009905ac-9baa-454f-9a00-f6ae04b334b3"')
-            buildConfigField("String", "IBM_CLIENT_SECRET", '"aL2uG5dT6iR4hS6gU3aP2uL0sK2xV5eB5pC1gQ4iF8dQ2aL6hJ"')
-            buildConfigField("String", "ENVIRONMENT", '"https://api-uat.unionbankph.com/"')
-        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "IBM_CLIENT_ID", '"009905ac-9baa-454f-9a00-f6ae04b334b3"')
-            buildConfigField("String", "IBM_CLIENT_SECRET", '"aL2uG5dT6iR4hS6gU3aP2uL0sK2xV5eB5pC1gQ4iF8dQ2aL6hJ"')
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
             buildConfigField("String", "ENVIRONMENT", '"https://api-uat.unionbankph.com/"')
-//            signingConfig signingConfigs.release
         }
     }
-
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES.txt'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/dependencies.txt'
-        exclude 'META-INF/LGPL2.1'
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+//     classpath 'com.google.gms:google-services:3.+'
+//     classpath 'com.google.android.gms:play-services:11.6.0'
 
-    // Automatically pulls in core SDK
-    compile group: 'com.ibm.mobilefirstplatform.clientsdk.android',
-            name: 'push',
-            version: '3.+',
-            ext: 'aar',
-            transitive: true
 
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support:design:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
-    compile 'joda-time:joda-time:2.9.4'
-    compile 'com.google.firebase:firebase-core:11.6.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
-    compile 'com.android.volley:volley:1.0.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.navigation:navigation-fragment:2.2.1'
+    implementation 'androidx.navigation:navigation-ui:2.2.1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    apply plugin: 'com.google.gms.google-services'
+//     implementation 'com.android.support:appcompat-v7:26.+'
+//     implementation 'com.android.support:design:26.+'
+//     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    testCompile 'junit:junit:4.12'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+
+    implementation 'joda-time:joda-time:2.9.4'
+    implementation 'com.google.firebase:firebase-core:11.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
+    implementation 'com.android.volley:volley:1.0.0'
+
+//    apply plugin: 'com.google.gms.google-services'
 }

@@ -1,12 +1,9 @@
 package com.mogh.cashyeah;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -17,15 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
-import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
-import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPush;
-import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushException;
-import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationListener;
-import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushResponseListener;
-import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPSimplePushNotification;
 import com.mogh.cashyeah.charts.MultiLineChartActivity;
-
-import org.w3c.dom.Text;
 
 public class LoginScreen extends AppCompatActivity
 {
@@ -36,7 +25,7 @@ public class LoginScreen extends AppCompatActivity
 
     private int mLoginPortalLoaded;
 
-    private MFPPushNotificationListener notificationListener;
+//    private MFPPushNotificationListener notificationListener;
 
     private TextView mTxtIntro;
 
@@ -108,67 +97,68 @@ public class LoginScreen extends AppCompatActivity
         FirebaseApp.initializeApp(this);
 
         // Initialize the SDK
-        BMSClient.getInstance().initialize(this, BMSClient.REGION_US_SOUTH);
-//Initialize client Push SDK
+        // BMSClient.getInstance().initialize(this, BMSClient.REGION_US_SOUTH);
 
-        final MFPPush push = MFPPush.getInstance();
-        push.initialize(getApplicationContext(), "7294203d-0806-42a0-984b-43e416f2cead", "69d18c69-01a3-4c55-9dfc-358fa1dc3dbe");
+        //Initialize client Push SDK
+
+        // final MFPPush push = MFPPush.getInstance();
+        // push.initialize(getApplicationContext(), "7294203d-0806-42a0-984b-43e416f2cead", "69d18c69-01a3-4c55-9dfc-358fa1dc3dbe");
 
         //Register Android devices
-        push.registerDevice(new MFPPushResponseListener<String>()
-        {
-
-            @Override
-            public void onSuccess(String response)
-            {
-                push.listen(notificationListener);
-            }
-
-            @Override
-            public void onFailure(MFPPushException ex)
-            {
-                System.out.println("onFailure");
-            }
-        });
+//        push.registerDevice(new MFPPushResponseListener<String>()
+//        {
+//
+//            @Override
+//            public void onSuccess(String response)
+//            {
+//                push.listen(notificationListener);
+//            }
+//
+//            @Override
+//            public void onFailure(MFPPushException ex)
+//            {
+//                System.out.println("onFailure");
+//            }
+//        });
 
         // Create notification listener and enable pop up notification when a message is received
-        notificationListener = new MFPPushNotificationListener()
-        {
-            @Override
-            public void onReceive(final MFPSimplePushNotification message)
-            {
-                Log.i(TAG, "Received a Push Notification: " + message.toString());
-                runOnUiThread(new Runnable()
-                {
-                    public void run()
-                    {
-                        Context context = getApplicationContext();
-                        NotificationManager notificationManager = (NotificationManager) context
-                                .getSystemService(NOTIFICATION_SERVICE);
-
-                        Notification updateComplete = new Notification();
-                        updateComplete.icon = android.R.drawable.stat_notify_sync;
-                        updateComplete.tickerText = message.getAlert();
-                        updateComplete.when = System.currentTimeMillis();
-
-                        Intent notificationIntent = new Intent(context,
-                                MultiLineChartActivity.class);
-                        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-                                notificationIntent, 0);
-
-                        String contentTitle = message.getAlert();
-                        Notification.Builder builder = new Notification.Builder(getApplicationContext());
-
-                        builder.setSmallIcon(R.mipmap.ic_launcher)
-                                .setContentTitle(contentTitle)
-                                .setContentIntent(contentIntent);
-
-                        Notification notification = builder.getNotification();
-                        notificationManager.notify(R.mipmap.ic_launcher, notification);
-                    }
-                });
-            }
-        };
+//        notificationListener = new MFPPushNotificationListener()
+//        {
+//            @Override
+//            public void onReceive(final MFPSimplePushNotification message)
+//            {
+//                Log.i(TAG, "Received a Push Notification: " + message.toString());
+//                runOnUiThread(new Runnable()
+//                {
+//                    public void run()
+//                    {
+//                        Context context = getApplicationContext();
+//                        NotificationManager notificationManager = (NotificationManager) context
+//                                .getSystemService(NOTIFICATION_SERVICE);
+//
+//                        Notification updateComplete = new Notification();
+//                        updateComplete.icon = android.R.drawable.stat_notify_sync;
+//                        updateComplete.tickerText = message.getAlert();
+//                        updateComplete.when = System.currentTimeMillis();
+//
+//                        Intent notificationIntent = new Intent(context,
+//                                MultiLineChartActivity.class);
+//                        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+//                                notificationIntent, 0);
+//
+//                        String contentTitle = message.getAlert();
+//                        Notification.Builder builder = new Notification.Builder(getApplicationContext());
+//
+//                        builder.setSmallIcon(R.mipmap.ic_launcher)
+//                                .setContentTitle(contentTitle)
+//                                .setContentIntent(contentIntent);
+//
+//                        Notification notification = builder.getNotification();
+//                        notificationManager.notify(R.mipmap.ic_launcher, notification);
+//                    }
+//                });
+//            }
+//        };
     }
 
     public class WebViewJS
